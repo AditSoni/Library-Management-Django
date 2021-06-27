@@ -93,7 +93,7 @@
             {% endfor %}
         {% endif %}
         <br>
-        {% if all_issued %}
+        {% if  all_issued %}
             <table class="table table-bordered">
                 <thead class="table-dark">
                 <tr>
@@ -108,11 +108,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for obj in all_issued %}
+                {% for obj in  all_issued %}
 
 
                     <tr>
-                        <td>{{ forloop.counter }}</td>
+                        <td>{{ obj.id }}</td>
                         <td>{{ obj.pid }}</td>
                         <td>{{ obj.isbn }}</td>
                         <td>{{ obj.date_issued }}</td>
@@ -125,6 +125,25 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item"><a class="page-link" href="?pg=1"><<</a></li>
+                    {% if all_issued.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?pg={{ all_issued.previous_page_number }}">{{ all_issued.previous_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link"
+                                             href="?pg={{ all_issued.number }}">{{ all_issued.number }}</a></li>
+                    {% if all_issued.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?pg={{ all_issued.next_page_number }}">{{ all_issued.next_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link" href="?pg={{ all_issued.paginator.num_pages }}">>></a>
+                    </li>
+                </ul>
+            </nav>
         {% else %}
             <h4>Nothing Found</h4>
             <p>Issue books if table is empty</p>

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 from .forms import *
 
@@ -14,12 +15,11 @@ def index(request):
 
 @login_required(login_url='/admin/login/')
 def books(request):
-    all_books = Books.objects.all
+    all_books = Books.objects.all()
     if request.method == "POST":
         form = BookForm(request.POST or None)
         if form.is_valid():
             form.save()
-
             messages.success(request, 'New Book Added')
         else:
             print(form.errors)
@@ -32,13 +32,17 @@ def books(request):
         if query is not None:
             all_books = objects.filter(Q(isbn__icontains=query) | Q(author__icontains=query)|Q(name__icontains=query))
 
+    paginator = Paginator(all_books,7)
+    page = request.GET.get('pg')
+    all_books = paginator.get_page(page)
+
     return render(request, 'books.html', {'all_books': all_books})
 
 
 
 @login_required(login_url='/admin/login/')
 def persons(request):
-    all_persons = Person.objects.all
+    all_persons = Person.objects.all()
 
     if request.method == "POST":
         form = PersonForm(request.POST or None)
@@ -56,15 +60,18 @@ def persons(request):
         objects = Person.objects.all()
         if query is not None:
             all_persons = objects.filter(Q(pid__icontains=query) | Q(name__icontains=query))
+    paginator = Paginator(all_persons, 7)
+    page = request.GET.get('pg')
+    all_persons = paginator.get_page(page)
 
     return render(request, 'persons.html', {'all_persons': all_persons})
 
 
 @login_required(login_url='/admin/login/')
 def issued(request):
-    all_books = Books.objects.all
-    all_persons = Person.objects.all
-    all_issued = Issued.objects.all
+    all_books = Books.objects.all()
+    all_persons = Person.objects.all()
+    all_issued = Issued.objects.all()
     if request.method == "POST":
         form = IssuedBookForm(request.POST or None)
         if form.is_valid():
@@ -82,6 +89,10 @@ def issued(request):
         objects = Issued.objects.all()
         if query is not None:
             all_issued = objects.filter(Q(pid__pid__icontains=query) | Q(isbn__isbn__icontains=query))
+
+    paginator = Paginator(all_issued, 7)
+    page = request.GET.get('pg')
+    all_issued = paginator.get_page(page)
 
     return render(request, 'issued.html',
                   {'all_issued': all_issued, 'all_books': all_books, 'all_persons': all_persons})

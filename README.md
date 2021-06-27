@@ -13,4 +13,4 @@ Python version used == Python 3.7.8
     
     -->python3 manage.py createsuperuser  This creates the user
     
-  3.Now Run  -->python3 manage.py runserver  and open the link
+  3. Now Run  -->python3 manage.py runserver  and open the link

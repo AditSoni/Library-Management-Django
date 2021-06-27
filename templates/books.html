@@ -106,7 +106,7 @@
 
                     <tr>
 
-                        <td>{{ forloop.counter }}</td>
+                        <td>{{ obj.id }}</td>
                         <td>{{ obj.name }}</td>
                         <td>{{ obj.isbn }}</td>
                         <td>{{ obj.author }}</td>
@@ -119,6 +119,25 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item"><a class="page-link" href="?pg=1"><<</a></li>
+                    {% if all_books.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?pg={{ all_books.previous_page_number }}">{{ all_books.previous_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link"
+                                             href="?pg={{ all_books.number }}">{{ all_books.number }}</a></li>
+                    {% if all_books.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?pg={{ all_books.next_page_number }}">{{ all_books.next_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link" href="?pg={{ all_books.paginator.num_pages }}">>></a>
+                    </li>
+                </ul>
+            </nav>
 
         {% else %}
             <h4>Nothing Found</h4>

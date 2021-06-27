@@ -20,31 +20,31 @@
                      data-parent="#accordionExample">
                     <div class="card-body">
                         <form method="post">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col">
-                    <label>Person ID</label>
-                    <input type="text" class="form-control" name="pid" placeholder="Enter ID">
-                </div>
-                <div class="col">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter Name">
-                </div>
-                <div class="col">
-                    <label>Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Enter Email">
-                </div>
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col">
+                                    <label>Person ID</label>
+                                    <input type="text" class="form-control" name="pid" placeholder="Enter ID">
+                                </div>
+                                <div class="col">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                                </div>
+                                <div class="col">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" placeholder="Enter Email">
+                                </div>
 
-                <div class="col">
-                    <label>Address</label>
-                    <input type="text" class="form-control" name="address" placeholder="Enter Address">
-                </div>
-            </div>
+                                <div class="col">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" name="address" placeholder="Enter Address">
+                                </div>
+                            </div>
 
-            <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Submit</button>
 
-        </form>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
 
 
                     <tr>
-                        <td>{{ forloop.counter }}</td>
+                        <td>{{ obj.id }}</td>
                         <td>{{ obj.pid }}</td>
                         <td>{{ obj.name }}</td>
                         <td>{{ obj.email }}</td>
@@ -118,6 +118,25 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item"><a class="page-link" href="?pg=1"><<</a></li>
+                    {% if all_persons.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?pg={{ all_persons.previous_page_number }}">{{ all_persons.previous_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link"
+                                             href="?pg={{ all_persons.number }}">{{ all_persons.number }}</a></li>
+                    {% if all_persons.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?pg={{ all_persons.next_page_number }}">{{ all_persons.next_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link" href="?pg={{ all_persons.paginator.num_pages }}">>></a>
+                    </li>
+                </ul>
+            </nav>
         {% else %}
             <h4>Nothing Found</h4>
             <p>Add Records if table is empty</p>

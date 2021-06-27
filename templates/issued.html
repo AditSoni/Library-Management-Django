@@ -26,7 +26,7 @@
                 <div class="col">
                     <label>Person ID</label>
 
-                    <input list="PersonID" name="pid" id="pid_input" class="form-control" placeholder="Select from list">
+                    <input required list="PersonID" name="pid" id="pid_input" class="form-control" placeholder="Select from list">
                     <datalist id="PersonID">
                         {% for obj in all_persons %}
                             <option value="{{ obj.pid }}">
@@ -38,7 +38,7 @@
                 <div class="col">
                     <label>Book ISBN</label>
 
-                    <input list="ISBN" name="isbn" id="find" class="form-control" placeholder="Select from list">
+                    <input required list="ISBN" name="isbn" id="find" class="form-control" placeholder="Select from list">
                     <datalist id="ISBN">
                         {% for obj in all_books %}
                             <option value="{{ obj.isbn }}">
@@ -69,7 +69,7 @@
                         <form method="get">
 
                             <label>Enter Pid or ISBN</label>
-                            <input type="text" name="q" placeholder="Pid or ISBN">
+                            <input required type="text" name="q" placeholder="Pid or ISBN">
 
                             <button type="submit" class="btn btn-primary">Search</button>
 

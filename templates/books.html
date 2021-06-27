@@ -24,20 +24,23 @@
                             <div class="row">
                                 <div class="col">
                                     <label>Book ISBN</label>
-                                    <input type="text" class="form-control" name="isbn" placeholder="Enter ISBN">
+                                    <input required type="text" class="form-control" name="isbn" placeholder="Enter 13 digit ISBN"
+                                    pattern="[0-9]{13}" maxlength="13">
                                 </div>
                                 <div class="col">
                                     <label>Book Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                                    <input required type="text" class="form-control" name="name" placeholder="Enter Name"
+                                    pattern="[a-zA-Z ]{3,}">
                                 </div>
                                 <div class="col">
                                     <label>Book Author</label>
-                                    <input type="text" class="form-control" name="author" placeholder="Enter Author">
+                                    <input required type="text" class="form-control" name="author" placeholder="Enter Author"
+                                    pattern="[a-zA-Z ]{4,}">
                                 </div>
 
                                 <div class="col">
                                     <label>Book Publisher</label>
-                                    <input type="text" class="form-control" name="publisher"
+                                    <input required type="text" class="form-control" name="publisher"
                                            placeholder="Enter Publisher">
                                 </div>
                             </div>
@@ -63,7 +66,7 @@
                         <form method="get">
 
                             <label>Enter ISBN or Name or Author</label>
-                            <input type="text" name="q" placeholder="ISBN or Name or Author">
+                            <input required type="text" name="q" placeholder="ISBN or Name or Author">
 
                             <button type="submit" class="btn btn-primary">Search</button>
 

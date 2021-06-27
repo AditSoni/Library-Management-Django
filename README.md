@@ -14,3 +14,10 @@ Python version used == Python 3.7.8
     -->python3 manage.py createsuperuser  This creates the user
     
   3. Now Run  -->python3 manage.py runserver  and open the link
+
+
+### Optional Future updates
+1. Current system has infinite stock,ie,a book can be issued any number of times
+2. Add Users who can view books and request issue
+3. Add Images of Book Covers,Person ID while adding records
+4. Limit Number of Books currently issued by Person

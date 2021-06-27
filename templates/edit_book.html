@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <label>Book ISBN</label>
+                    <input type="text" class="form-control" name="isbn" placeholder="{{ task_obj.isbn }}"
+                           value="{{ task_obj.isbn }}">
+                </div>
+                <div class="col">
+                    <label>Book Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="{{ task_obj.name }}"
+                           value="{{ task_obj.name }}">
+                </div>
+                <div class="col">
+                    <label>Book Author</label>
+                    <input type="text" class="form-control" name="author" placeholder="{{ task_obj.author }}"
+                           value="{{ task_obj.author }}">
+                </div>
+
+                <div class="col">
+                    <label>Book Publisher</label>
+                    <input type="text" class="form-control" name="publisher" placeholder="{{ task_obj.publisher }}"
+                           value="{{ task_obj.publisher }}">
+                </div>
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Update</button>
+
+        </form>
+    <br>
+    <form  method="get" action="{% url 'delete_book' task_obj.id %}" style="text-align: center">
+        <button type=" submit" class="btn btn-danger">Delete Record</button>
+    </form>
+    </div>
+
+{% endblock %}

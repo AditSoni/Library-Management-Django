@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+
+        <h1>ISSUED TO People</h1>
+
+    <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Issue Books
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse " aria-labelledby="headingOne"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <form method="post" autocomplete="off">
+            {% csrf_token %}
+            <div class="row">
+
+                <div class="col">
+                    <label>Person ID</label>
+
+                    <input list="PersonID" name="pid" id="pid_input" class="form-control" placeholder="Select from list">
+                    <datalist id="PersonID">
+                        {% for obj in all_persons %}
+                            <option value="{{ obj.pid }}">
+                        {% endfor %}
+
+                    </datalist>
+                </div>
+
+                <div class="col">
+                    <label>Book ISBN</label>
+
+                    <input list="ISBN" name="isbn" id="find" class="form-control" placeholder="Select from list">
+                    <datalist id="ISBN">
+                        {% for obj in all_books %}
+                            <option value="{{ obj.isbn }}">
+                        {% endfor %}
+
+                    </datalist>
+                </div>
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Search
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <form method="get">
+
+                            <label>Enter Pid or ISBN</label>
+                            <input type="text" name="q" placeholder="Pid or ISBN">
+
+                            <button type="submit" class="btn btn-primary">Search</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    <br>
+        {% if messages %}
+            {% for mssg in messages %}
+                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        {{ mssg}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+            {% endfor %}
+        {% endif %}
+        <br>
+        {% if all_issued %}
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Person </th>
+                    <th scope="col">Book </th>
+                    <th scope="col">Date Issued</th>
+                    <th scope="col">Date Return</th>
+                    <th scope="col">Edit</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in all_issued %}
+
+
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ obj.pid }}</td>
+                        <td>{{ obj.isbn }}</td>
+                        <td>{{ obj.date_issued }}</td>
+                        <td>{{ obj.expires_on }}</td>
+                    <td><a href="{% url 'edit_issued' obj.id %}"> Edit </a></td>
+
+
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h4>Nothing Found</h4>
+            <p>Issue books if table is empty</p>
+        {% endif %}
+
+    </div>
+{% endblock %}

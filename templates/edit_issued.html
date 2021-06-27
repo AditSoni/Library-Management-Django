@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+
+                <th scope="col">Person</th>
+                <th scope="col">Book</th>
+                <th scope="col">Date Issued</th>
+                <th scope="col">Date Return</th>
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+                <td>{{ task_obj.pid }}</td>
+                <td>{{ task_obj.isbn }}</td>
+                <td>{{ task_obj.date_issued }}</td>
+                <td>{{ task_obj.expires_on }}</td>
+
+
+
+            </tr>
+            </tbody>
+        </table>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+
+
+                <input type="hidden" class="form-control" name="pid" value="{{ task_obj.pid }}">
+                <input type="hidden" class="form-control" name="isbn" value="{{ task_obj.isbn }}">
+
+
+                <div class="col" style="text-align: center">
+                    Change Return Date<br>
+                    <input type="date" id="start" name="expires_on">
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+
+        </form>
+        <br>
+
+            <div class="add-row">
+            <form method="get" action="{% url 'delete_issued' task_obj.id %}" style="text-align: center">
+                <button type=" submit" class="btn btn-danger">Delete Record</button>
+            </form>
+            </div>
+
+
+{% endblock %}

@@ -1,6 +1,8 @@
 # Library-Management-Django
 A simple Library Management System with basic CRUD operations
 
+Python version used == Python 3.7.8
+
 ## How To Run
 1. pip install -r requirements.txt to install all dependencies
 2. while in base directory ,the directory with manage.py  ,Run following in terminal

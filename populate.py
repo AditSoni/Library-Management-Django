@@ -28,7 +28,7 @@ def populate_data():
 
     for i in range(50):
         book = random.choice(books)
-        isbn = fake.numerify(text='##########')
+        isbn = fake.numerify(text='#############')
         author = fake.name()
         publisher = fake.first_name()
 

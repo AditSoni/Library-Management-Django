@@ -24,20 +24,25 @@
                             <div class="row">
                                 <div class="col">
                                     <label>Person ID</label>
-                                    <input type="text" class="form-control" name="pid" placeholder="Enter ID">
+                                    <input required type="text" class="form-control" name="pid" placeholder="Enter 6 digit ID"
+                                           pattern="[0-9]{6}" maxlength="6">
                                 </div>
                                 <div class="col">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                                    <input required type="text" class="form-control" name="name"
+                                           placeholder="Enter Name"
+                                           pattern="[a-zA-Z ]{3,}">
                                 </div>
                                 <div class="col">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Enter Email">
+                                    <input required type="email" class="form-control" name="email"
+                                           placeholder="Enter Email">
                                 </div>
 
                                 <div class="col">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" name="address" placeholder="Enter Address">
+                                    <input required type="text" class="form-control" name="address"
+                                           placeholder="Enter Address">
                                 </div>
                             </div>
 
@@ -62,7 +67,7 @@
                         <form method="get">
 
                             <label>Enter Pid or Name</label>
-                            <input type="text" name="q" placeholder="Pid or Name">
+                            <input required type="text" name="q" placeholder="Pid or Name">
 
                             <button type="submit" class="btn btn-primary">Search</button>
 

@@ -1,7 +1,8 @@
-from faker import Faker
-import random
-import django
 import os
+import random
+
+import django
+from faker import Faker
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Library_Management.settings')
 django.setup()

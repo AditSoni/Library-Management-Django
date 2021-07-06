@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.db.models import Q
 from django.core.paginator import Paginator
+from django.db.models import Q
+from django.shortcuts import render, redirect
 
 from .forms import *
 
@@ -30,14 +30,13 @@ def books(request):
         query = request.GET.get("q", None)
         objects = Books.objects.all()
         if query is not None:
-            all_books = objects.filter(Q(isbn__icontains=query) | Q(author__icontains=query)|Q(name__icontains=query))
+            all_books = objects.filter(Q(isbn__icontains=query) | Q(author__icontains=query) | Q(name__icontains=query))
 
-    paginator = Paginator(all_books,7)
+    paginator = Paginator(all_books, 7)
     page = request.GET.get('pg')
     all_books = paginator.get_page(page)
 
     return render(request, 'books.html', {'all_books': all_books})
-
 
 
 @login_required(login_url='/admin/login/')
@@ -102,7 +101,7 @@ def issued(request):
 def delete_book(request, task_id):
     task = Books.objects.get(pk=task_id)
     task.delete()
-    messages.success(request,"Record Deleted!")
+    messages.success(request, "Record Deleted!")
     return redirect('books')
 
 
@@ -110,7 +109,7 @@ def delete_book(request, task_id):
 def delete_person(request, task_id):
     task = Person.objects.get(pk=task_id)
     task.delete()
-    messages.success(request,"Record Deleted!")
+    messages.success(request, "Record Deleted!")
     return redirect('persons')
 
 
@@ -118,7 +117,7 @@ def delete_person(request, task_id):
 def delete_issued(request, task_id):
     task = Issued.objects.get(pk=task_id)
     task.delete()
-    messages.success(request,"Record Deleted!")
+    messages.success(request, "Record Deleted!")
     return redirect('issued')
 
 

@@ -32,8 +32,8 @@ def get_expire():
 
 
 class Issued(models.Model):
-    pid = models.ForeignKey(Person, to_field='pid', on_delete=models.CASCADE,related_name='fpid')
-    isbn = models.ForeignKey(Books, to_field='isbn', on_delete=models.CASCADE,related_name='fisbn')
+    pid = models.ForeignKey(Person, to_field='pid', on_delete=models.CASCADE, related_name='fpid')
+    isbn = models.ForeignKey(Books, to_field='isbn', on_delete=models.CASCADE, related_name='fisbn')
     date_issued = models.DateField(auto_now_add=True)
     expires_on = models.DateField(default=get_expire)
 
